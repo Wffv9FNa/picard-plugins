@@ -24,7 +24,8 @@ def move_track_featartists(tagger, metadata, track, release):
     match = _feat_re.match(metadata["artist"])
     if match:
         metadata["artist"] = match.group(1)
-        metadata["title"] += " (feat.%s)" % match.group(2)
+        featured_artist = match.group(2).strip()
+        metadata["title"] = metadata["title"].title() + " (feat. " + featured_artist.title() + ")"
     match = _feat_re.match(metadata["artistsort"])
     if match:
         metadata["artistsort"] = match.group(1)

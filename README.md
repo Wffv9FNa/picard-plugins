@@ -1,9 +1,37 @@
-# MusicBrainz Picard Plugins
+# Feat. Artists in Titles - Personal Modification
 
-This repository hosts plugins for [MusicBrainz Picard](https://picard.musicbrainz.org/). If you're a plugin author and would like to include your plugin here, simply open a pull request.
+This repository contains a modified version of the "Feat. Artists in Titles" plugin for [MusicBrainz Picard](https://picard.musicbrainz.org/).
 
-Note that new plugins being added to the repository should be under the GNU General Public License version 2 ("GPL") or a license compatible with it. See https://www.gnu.org/licenses/license-list.html for a list of compatible licenses.
+## Original Plugin
 
-## Development Notes
+The original script was created by **Lukas Lalinsky, Michael Wiencek, Bryan Toth, and JeromyNix (NobahdiAtoll)**. Its purpose is to move "feat." from artist names to album and track titles.
 
-The script `generate.py` will generate a file called `plugins.json`, which contains metadata about all the plugins in this repository. `plugins.json` is used by [picard-website](https://github.com/musicbrainz/picard-website) and Picard itself to display information about downloadable plugins.
+## Modification
+
+This version introduces a small change to the `move_track_featartists` function. In addition to its original behavior, the script now also:
+
+1.  Title-cases the main song title.
+2.  Title-cases the featured artist's name.
+3.  Ensures `(feat. ...)` remains in lowercase within the title.
+
+## Purpose of this Fork
+
+This modification was created to solve a specific formatting problem. Using the standard Picard tagger script function `$title(%title%)` also capitalizes "feat." to "Feat.", which is undesirable.
+
+This modified plugin provides a way to correctly title-case the song and featured artist while preserving the lowercase "feat." convention. This change makes the following part of a tagger script unnecessary:
+
+```
+$noop(
+For track title
+    $set(title,$title(%title%))
+Not needed with custom python script
+)
+
+$set(album,$title(%album%))
+$set(artist,$title(%artist%))
+$set(artists,$title(%artists%))
+$set(albumartist,$title(%albumartist%))
+$set(albumartistsort,$title(%albumartistsort%))
+$set(artistsort,$title(%artistsort%))
+$set(albumartistsortorder,$title(%albumartistsortorder%))
+```
