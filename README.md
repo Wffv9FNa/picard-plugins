@@ -1,3 +1,10 @@
+## Fork Updates
+
+*   **Custom Title-Casing:** The plugin now applies title-casing to all track titles, not just those with featured artists.
+*   **Apostrophe Handling:** Correctly formats words with apostrophes (e.g., "I'm", "Let's"), including handling of different apostrophe characters (e.g. `'` and `'`).
+*   **Lowercase "feat.":** Ensures the `(feat. ...)` part of the title remains in lowercase, overriding Picard's default title-casing behavior.
+*   **Featured Artist Casing:** Title-cases the featured artist's name within the `(feat. ...)` section.
+
 # Feat. Artists in Titles - Personal Modification
 
 This repository contains a modified version of the "Feat. Artists in Titles" plugin for [MusicBrainz Picard](https://picard.musicbrainz.org/).

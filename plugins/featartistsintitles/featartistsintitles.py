@@ -25,7 +25,7 @@ def _fixed_title(s):
     log.debug(f"FEATARTISTS: AFTER s.title() repr: {repr(titled_s)}")
 
     # Debug apostrophe characters - check for both ASCII and Unicode apostrophes
-    apostrophe_chars = ["'", "'", "'", "`"]  # ASCII 39, Unicode 8217, Unicode 8216, grave accent
+    apostrophe_chars = ["'", "’", "‘", "`"]  # ASCII 39, Unicode 8217, Unicode 8216, grave accent
     for i, char in enumerate(titled_s):
         if char in apostrophe_chars:
             context_start = max(0, i-2)
@@ -33,9 +33,9 @@ def _fixed_title(s):
             context = titled_s[context_start:context_end]
             log.debug(f"FEATARTISTS: APOSTROPHE found at pos {i}: '{char}' (ord={ord(char)}) in context: '{context}'")
 
-    # Apply the regex fix for Unicode 8217 (right single quotation mark)
+    # Apply the regex fix for Unicode 8217, ASCII 39 , Unicode 8216, and grave accent
     # This is the actual character used in MusicBrainz data after .title()
-    pattern = r"(\w)’([A-Za-z])"  # Unicode 8217 right single quotation mark
+    pattern = r"(\w)['’‘`]([A-Za-z])"  # Unicode 8217 right single quotation mark
     matches = re.findall(pattern, titled_s)
     log.debug(f"FEATARTISTS: REGEX PATTERN: {pattern}")
     log.debug(f"FEATARTISTS: REGEX MATCHES found: {matches}")
